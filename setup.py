@@ -44,4 +44,9 @@ setup(
         "License :: OSI Approved :: Apache Software License",
         "Programming Language :: Python :: 3",
     ],
+    entry_points={
+        "console_scripts": [
+            "cyberpower_exporter = cyberpower_exporter.command:main"
+        ]
+    },
 )
