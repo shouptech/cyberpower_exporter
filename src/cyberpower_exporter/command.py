@@ -57,6 +57,8 @@ def get_data():
 
     for line in data.decode("ascii").splitlines():
         col = line.split("=")
+        if len(col) != 2:
+            continue
         result[col[0]] = col[1]
 
     return result
