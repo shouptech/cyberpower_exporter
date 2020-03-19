@@ -21,15 +21,22 @@ import prometheus_client
 def main():
     prometheus_client.start_http_server(10100)
     # Check once every second and update the prometheus gauges
+    collectors = register_prometheus_collectors()
     while True:
-        set_prometheus_values()
+        set_prometheus_values(collectors)
         time.sleep(1)
 
 
-def set_prometheus_values():
+def register_prometheus_collectors():
+    collectors = {}
+    collectors["info"] = prometheus_client.Info(
+        "cyberpower", "Information about UPS"
+    )
+
+
+def set_prometheus_values(collectors):
     data = get_data()
-    info = prometheus_client.Info("cyberpower_info", "Information about UPS")
-    info.info(
+    collectors["info"].info(
         {
             "model_name": data["model_name"],
             "firmware_num": data["firmware_num"],
