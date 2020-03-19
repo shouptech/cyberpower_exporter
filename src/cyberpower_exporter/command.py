@@ -32,6 +32,7 @@ def register_prometheus_collectors():
     collectors["info"] = prometheus_client.Info(
         "cyberpower", "Information about UPS"
     )
+    return collectors
 
 
 def set_prometheus_values(collectors):
