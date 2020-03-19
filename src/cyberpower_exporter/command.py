@@ -32,6 +32,12 @@ def register_prometheus_collectors():
     collectors["info"] = prometheus_client.Info(
         "cyberpower", "Information about UPS"
     )
+    collectors["utility_volt"] = prometheus_client.Gauge(
+        "utility_volt", "Voltage from the utility"
+    )
+    collectors["output_volt"] = prometheus_client.Gauge(
+        "output_volt", "Voltage output"
+    )
     return collectors
 
 
@@ -45,14 +51,8 @@ def set_prometheus_values(collectors):
             "output_rating_watt": float(data["output_rating_watt"]) / 1000,
         }
     )
-
-    utility_volt = prometheus_client.Gauge(
-        "utility_volt", "Voltage from the utility"
-    )
-    utility_volt.set(float(data["utility_volt"]) / 1000)
-
-    output_volt = prometheus_client.Gauge("output_volt", "Voltage output")
-    output_volt.set(float(data["output_volt"]) / 1000)
+    collectors["utility_volt"].set(float(data["utility_volt"]) / 1000)
+    collectors["output_volt"].set(float(data["output_volt"]) / 1000)
 
 
 def get_data():
