@@ -47,8 +47,10 @@ def set_prometheus_values(collectors):
         {
             "model_name": data["model_name"],
             "firmware_num": data["firmware_num"],
-            "input_rating_volut": float(data["input_rating_volt"]) / 1000,
-            "output_rating_watt": float(data["output_rating_watt"]) / 1000,
+            "input_rating_volut": str(float(data["input_rating_volt"]) / 1000),
+            "output_rating_watt": str(
+                float(data["output_rating_watt"]) / 1000
+            ),
         }
     )
     collectors["utility_volt"].set(float(data["utility_volt"]) / 1000)
