@@ -59,7 +59,6 @@ def register_prometheus_collectors():
     collectors["battery_capacity"] = prometheus_client.Gauge(
         "cyberpower_battery_capacity", "Percentage of battery remaining"
     )
-    collectors[""]
     return collectors
 
 
