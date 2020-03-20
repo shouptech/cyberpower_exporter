@@ -6,7 +6,9 @@ This is an application for exporting cyberpower ups metrics to Prometheus.
 Installation
 ------------
 
-First, make sure you have python3 and pip3 installed. Then:
+First, install the CyberPower PowerPanel Personal Linux software: https://www.cyberpowersystems.com/product/software/power-panel-personal/powerpanel-for-linux/
+
+Second, make sure you have python3 and pip3 installed. Then:
 
 ::
 
