@@ -59,8 +59,8 @@ def register_prometheus_collectors():
     collectors["battery_capacity"] = prometheus_client.Gauge(
         "cyberpower_battery_capacity", "Percentage of battery remaining"
     )
-    collectors["input_rating_volut"] = prometheus_client.Gauge(
-        "cyberpower_input_rating_volut", "Input voltage rating"
+    collectors["input_rating_volt"] = prometheus_client.Gauge(
+        "cyberpower_input_rating_volt", "Input voltage rating"
     )
     collectors["output_rating_watt"] = prometheus_client.Gauge(
         "cyberpower_output_rating_watt", "Output watts rating"
@@ -92,7 +92,7 @@ def set_prometheus_values(collectors):
     collectors["output_rating_watt"].set(
         float(data["output_rating_watt"]) / 1000
     )
-    collectors["input_rating_volut"].set(
+    collectors["input_rating_volt"].set(
         float(data["input_rating_volt"]) / 1000
     )
 
