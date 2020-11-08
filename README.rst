@@ -1,10 +1,11 @@
+*******************
 cyberpower_exporter
-===================
+*******************
 
 This is an application for exporting cyberpower ups metrics to Prometheus.
 
 Installation
-------------
+============
 
 First, install the CyberPower PowerPanel Personal Linux software: https://www.cyberpowersystems.com/product/software/power-panel-personal/powerpanel-for-linux/
 
@@ -12,7 +13,7 @@ Second, make sure you have python3 and pip3 installed. Then:
 
 ::
 
-    sudo pip3 install git+https://gitlab.com/shouptech/cyberpower_exporter.git
+    sudo pip3 install git+https://gitlab.com/shouptech/cyberpower_exporter.git@0.2
 
 Installing as root is important. The application must run as root in order to access the cyberpower data.
 
@@ -61,3 +62,20 @@ Test that it's working by running:
     curl <ipaddress>:10100
 
 Now go ahead and point prometheus to it!
+
+
+Changelog
+=========
+
+0.2
+----
+
+* Created environment variable ``CYBERPOWER_EXPORTER_POLL_INTERVAL`` for adjusting
+  polling interval.
+* Moved input rating and output rating to prometheus gauges to make it easier to use
+  those data points in dashboards.
+
+0.1
+----
+
+Initial release

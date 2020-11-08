@@ -1,3 +1,4 @@
 -e .
 black
 pre-commit
+flake8

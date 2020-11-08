@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+import os
 import socket
 import time
 import prometheus_client
@@ -24,7 +24,7 @@ def main():
     collectors = register_prometheus_collectors()
     while True:
         set_prometheus_values(collectors)
-        time.sleep(1)
+        time.sleep(os.getenv("CYBERPOWER_EXPORTER_POLL_INTERVAL", 5))
 
 
 def register_prometheus_collectors():
@@ -59,6 +59,12 @@ def register_prometheus_collectors():
     collectors["battery_capacity"] = prometheus_client.Gauge(
         "cyberpower_battery_capacity", "Percentage of battery remaining"
     )
+    collectors["input_rating_volut"] = prometheus_client.Gauge(
+        "cyberpower_input_rating_volut", "Input voltage rating"
+    )
+    collectors["output_rating_watt"] = prometheus_client.Gauge(
+        "cyberpower_output_rating_watt", "Output watts rating"
+    )
     return collectors
 
 
@@ -68,10 +74,6 @@ def set_prometheus_values(collectors):
         {
             "model_name": data["model_name"],
             "firmware_num": data["firmware_num"],
-            "input_rating_volut": str(float(data["input_rating_volt"]) / 1000),
-            "output_rating_watt": str(
-                float(data["output_rating_watt"]) / 1000
-            ),
         }
     )
     collectors["utility_volt"].set(float(data["utility_volt"]) / 1000)
@@ -87,6 +89,12 @@ def set_prometheus_values(collectors):
     collectors["ac_present"].set(1 if data["ac_present"] == "yes" else 0)
     collectors["load"].set(float(data["load"]) / 100000)
     collectors["battery_capacity"].set(float(data["battery_capacity"]) / 100)
+    collectors["output_rating_watt"].set(
+        float(data["output_rating_watt"]) / 1000
+    )
+    collectors["input_rating_volut"].set(
+        float(data["input_rating_volt"]) / 1000
+    )
 
 
 def get_data():
