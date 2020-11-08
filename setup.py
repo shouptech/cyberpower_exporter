@@ -27,7 +27,7 @@ install_requires = [
 
 setup(
     name="cyberpower_exporter",
-    version="0.1",
+    version="0.2",
     url="https://github.com/shouptech/cyberpower_exporter",
     author="Mike Shoup",
     author_email="mike@shoup.io",
